@@ -86,21 +86,21 @@ end:	lw $a0,0($sp) 	# restore registers
 #	t0 - holds the value removed		#
 #-----------------------------------------------#
 moveRing:
-	sub $sp,$sp,12		# save registers on stack
+	sub $sp,$sp,12	# save registers on stack
 	sw $a0,0($sp)
 	sw $a1,4($sp)
 	sw $ra,8($sp)
 
-  	jal PrintTowers		# print out state of towers
+  	jal PrintTowers	# print out state of towers
 
 finds:	sub $a0,$a0,4	# get the top ring
 	lw $t0,($a0)
 	beqz $t0,founds
-	j finds				# find source
+	j finds		# find source
 founds:	add $a0,$a0,4
 
-	lw $t0,($a0)		# t0 holds the value removed
-	sw $0,($a0)			# set place to zero
+	lw $t0,($a0)	# t0 holds the value removed
+	sw $0,($a0)	# set place to zero
 	
 findd:	sub $a1,$a1,4	# find destination
 	lw $t1,($a1)
@@ -108,7 +108,7 @@ findd:	sub $a1,$a1,4	# find destination
 	j findd
 foundd:	sw $t0,($a1)	# destination found
 
-	lw $a0,0($sp)		# restore registers
+	lw $a0,0($sp)	# restore registers
 	lw $a1,4($sp)
 	lw $ra,8($sp)
 	add $sp,$sp,12
@@ -142,10 +142,10 @@ PrintTowers:
 	sub $s2,$s2,$s0
 	sub $s3,$s3,$s0
 
-Loop:	beqz $s0,exit  # if at level -n done
+Loop:	beqz $s0,exit   # if at level -n done
 	la $a0,Blanks
-	li $v0,4		   # system call to print
-	syscall			   # out a string
+	li $v0,4	# system call to print
+	syscall		# out a string
   
 	lw $a0,($s1)	   # read number on stack 1
 	jal printOne	   # print blank or ring
@@ -154,19 +154,19 @@ Loop:	beqz $s0,exit  # if at level -n done
 	lw $a0,($s3)	   # read number on stack 3
 	jal printOne	   # print blank or ring
 
-	la $a0,endl	       # end line
-	li $v0,4	       # system call to print
-	syscall			   # out a string
+	la $a0,endl	# end line
+	li $v0,4	# system call to print
+	syscall		# out a string
 
 	sub $s0,$s0,4	   # move up to next level
 	add $s1,$s1,4
 	add $s2,$s2,4
 	add $s3,$s3,4
-	j Loop			   # repeat until $s0=0
+	j Loop		   # repeat until $s0=0
 
 exit:	la $a0,Base	   # print Tower names and lines
-	li $v0,4		   # system call to print
-	syscall			   # out a string
+	li $v0,4	   # system call to print
+	syscall	           # out a string
 
 	lw $v0,0($sp)	   # restore registers
 	lw $a0,4($sp)
@@ -193,16 +193,16 @@ printOne:
 
 	bnez $a0,ring		# if not zero then print it
 	la $a0,Blank
-	li $v0,4			# system call to print
-	syscall				# out a string
+	li $v0,4		# system call to print
+	syscall			# out a string
 
 	j spaces
 ring:	li $v0,1		# print number
 	syscall
 
-spaces:	la $a0,Blanks	# space output out
-	li $v0,4			# system call to print
-	syscall				# out a string
+spaces:	la $a0,Blanks		# space output out
+	li $v0,4		# system call to print
+	syscall			# out a string
 		  
 	lw $a0,0($sp)		# restore registers
 	lw $v0,4($sp)
