@@ -21,17 +21,17 @@ __start:
 	syscall		# au revoir...
 
 
-#------------------------------------------------
-# moveStack - recursive implementation of the
-# towers of hanoi
-#	a0 - source tower
-#	a1 - destination tower
-#	a2 - spare tower
-#	a3 - number of rings
-#	s0 - source tower
-#	s1 - destination tower
-#	s2 - spare tower
-#------------------------------------------------
+#-----------------------------------------------#
+# moveStack - recursive implementation of the   #
+# towers of hanoi				#
+#	a0 - source tower			#
+#	a1 - destination tower			#
+#	a2 - spare tower			#
+#	a3 - number of rings			#
+#	s0 - source tower			#
+#	s1 - destination tower			#
+#	s2 - spare tower			#
+#-----------------------------------------------#
 moveStack:
 	sub $sp,$sp,32 	# save registers on stack
 	sw $a0,0($sp)
@@ -79,12 +79,12 @@ end:	lw $a0,0($sp) 	# restore registers
 	add $sp,$sp,32
 	jr $ra
 
-#------------------------------------------------
-# moveRing - move one ring from source to dest
-#	a0 - source
-#	a1 - dest
-#	t0 - holds the value removed
-#------------------------------------------------
+#-----------------------------------------------#
+# moveRing - move one ring from source to dest	#
+#	a0 - source				#
+#	a1 - dest				#
+#	t0 - holds the value removed		#
+#-----------------------------------------------#
 moveRing:
 	sub $sp,$sp,12		# save registers on stack
 	sw $a0,0($sp)
@@ -115,13 +115,13 @@ foundd:	sw $t0,($a1)	# destination found
 
 	jr $ra
 
-#------------------------------------------------
-# PrintTowers - print out state of towers
-#	s0 - number of rings
-#	s1 - tower1
-#	s2 - tower2
-#	s3 - tower3
-#------------------------------------------------
+#-----------------------------------------------#
+# PrintTowers - print out state of towers	#
+#	s0 - number of rings			#
+#	s1 - tower1				#
+#	s2 - tower2				#
+#	s3 - tower3				#
+#-----------------------------------------------#
 PrintTowers:	
 	sub $sp,$sp,28 	# save registers on stack
 	sw $v0,0($sp)
@@ -179,11 +179,11 @@ exit:	la $a0,Base	   # print Tower names and lines
 	jr $ra
 
 
-#------------------------------------------------
-# printOne - print blank or ring number
-#	a0 - holds ring number or 0
-#	v0 - parameter for system call
-#------------------------------------------------
+#-----------------------------------------------#
+# printOne - print blank or ring number		#
+#	a0 - holds ring number or 0		#
+#	v0 - parameter for system call		#
+#-----------------------------------------------#
 
 printOne:
 	sub $sp,$sp,12		# save registers on stack
